@@ -31,12 +31,12 @@ c1 = Client.new('Shafali', 100,'f', 0, animals1)
 c2 = Client.new('Chloe', 95, 'f', 5, animals2)
 c3 = Client.new('Brian',123,'m', 13, animals3)
 
-
-
-
 clients = [c1,c2,c3]
-
 shelter = Shelter.new("HappyTrails", clients, animals4)
+
+
+
+
 
 choice = nil
 while choice != 6
@@ -50,7 +50,7 @@ while choice != 6
   puts "(5) Adopt an Animal"
   puts "(6) Quit"
   30.times.each {print '-'}
-  puts "\nWhat would you like to do? "
+  puts "\n What would you like to do? "
   choice = gets.to_i
 
 
@@ -102,7 +102,15 @@ while choice != 6
   when 5
     print "\nWhat is your name?"
     name = gets.chomp
-    clientObj = shelter.find_client_by_name(name)
+    #clientObj = shelter.find_client_by_name(name)
+    clientObj = nil
+    clients.each { |client| clientObj = client if client.name == name}
+    if clientObj == nil
+      print "\nWould you like to register? (Y) or (N)"
+      registering = gets.chomp
+      next if registering != 'Y'.downcase
+
+    end
 
     shelter.animals.count.times { |i| puts "#{i}. #{shelter.animals[i]}" }
     puts "Which animal do you want to adopt?"
