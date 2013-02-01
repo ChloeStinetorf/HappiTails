@@ -32,6 +32,8 @@ c2 = Client.new('Chloe', 95, 'f', 5, animals2)
 c3 = Client.new('Brian',123,'m', 13, animals3)
 
 
+
+
 clients = [c1,c2,c3]
 
 shelter = Shelter.new("HappyTrails", clients, animals4)
@@ -40,13 +42,15 @@ choice = nil
 while choice != 6
   system('clear')
   puts "Welcome to HappyTails Animal Shelter!"
-  puts "What Would you Like to Do?"
-  puts "(1) View Available Animals"
+  30.times.each {print '-'}
+  puts "\n(1) View Available Animals"
   puts "(2) View All Animals"
   puts "(3) View All Clients"
   puts "(4) Give Up Your Animal For Adoption"
   puts "(5) Adopt an Animal"
   puts "(6) Quit"
+  30.times.each {print '-'}
+  puts "\nWhat would you like to do? "
   choice = gets.to_i
 
 
