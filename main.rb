@@ -72,7 +72,7 @@ while choice != 6
   when 3
     ### views all clients
     puts "\nAll Clients: "
-    puts shelter.show_all_clients
+    shelter.clients.each {|client| puts client}
     puts "Press Enter to Continue..."
     gets
   ### Give Up Your Animal for Adoption

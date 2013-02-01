@@ -9,7 +9,7 @@ class Animal
   end
 
   def to_s
-    "#{name}"
+    "Pet: #{@name}, Age: #{@age}, Breed: #{@breed}, Gender: #{@gender}"
   end
 
 

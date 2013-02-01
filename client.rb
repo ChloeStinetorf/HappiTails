@@ -15,6 +15,6 @@ class Client
   end
 
   def to_s
-    "#{@name}"
+    "Client: #{@name}, Gender: #{@gender}, Number of Pets: #{@num_pets}"
   end
 end
