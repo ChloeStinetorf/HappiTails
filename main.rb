@@ -4,7 +4,7 @@ require 'pry-debugger'
 require_relative 'shelter'
 require_relative 'client'
 require_relative 'animal'
-#require_relative 'data'
+require_relative 'data'
 
 p1 = Animal.new('Fido',13,'cat','f',)
 p2 = Animal.new('Brandy',13,'cat','f',)
@@ -33,6 +33,7 @@ c3 = Client.new('Brian',123,'m', 13, animals3)
 
 
 clients = [c1,c2,c3]
+
 shelter = Shelter.new("HappyTrails", clients, animals4)
 
 choice = nil
