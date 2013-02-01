@@ -4,7 +4,7 @@ require 'pry-debugger'
 require_relative 'shelter'
 require_relative 'client'
 require_relative 'animal'
-require_relative 'data'
+#require_relative 'data'
 
 p1 = Animal.new('Fido',13,'cat','f',)
 p2 = Animal.new('Brandy',13,'cat','f',)
@@ -54,18 +54,16 @@ while choice != 6
   ### View Available Animals
   when 1
     puts "\nHere are the animals available for adoption: "
-    shelter.animals.each {|animal| puts animal.name}
+    shelter.animals.each {|animal| puts animal}
     puts "Press Enter to Continue..."
     gets
 
   ### View All Animals
   when 2
     puts "\nAll Animals: "
-    puts shelter.animals.each {|animal| puts animal.name}
+    shelter.animals.each {|animal| puts animal}
     shelter.clients.each do |client|
-      client.animals.each do |animal|
-        puts animal.name
-      end
+      client.animals.each { |animal| puts animal}
     end
     puts "\n"
     puts "Press Enter to Continue..."
@@ -82,33 +80,19 @@ while choice != 6
     print "\nWhat is your name?"
     name = gets.chomp
     clientObj = shelter.find_client_by_name(name)
-    #binding.pry
-    clientObj.animals.count.times do |i|
-      puts "#{i}. #{clientObj.animals[i]}"
-    end
+    clientObj.animals.count.times { |i| puts "(#{i}) #{clientObj.animals[i]}" }
+
     puts "\nWhich animal do you wish to give up? "
     index = gets.to_i
     new_animal = clientObj.animals[index]
-    # add to shelter's animals
-    shelter.animals.push(clientObj.animals[index])
-    #remove from client obj
+    shelter.animals << clientObj.animals[index]
     clientObj.animals.reject! {|animal| animal == new_animal }
 
     puts "\nHere are your pets:"
-    clientObj.animals.count.times do |i|
-      puts "#{i}. #{clientObj.animals[i]}"
-    end
+    clientObj.animals.count.times { |i| puts "#{i}. #{clientObj.animals[i]}" }
 
     puts "Press Enter to Continue..."
     gets
-
-
-    # Ask for nameIf not registered, then register!
-        # input client info.
-    # Show client's animals
-    # Which one would you like to give up?
-    # @animals << client_animal_object (make sure to remove from client -- .pop!)
-    #client = client
 
   ### Adopt an Animal
   when 5
@@ -116,19 +100,15 @@ while choice != 6
     name = gets.chomp
     clientObj = shelter.find_client_by_name(name)
 
-
-
-    shelter.animals.count.times do |i|
-      puts "#{i}. #{shelter.animals[i]}"
-    end
+    shelter.animals.count.times { |i| puts "#{i}. #{shelter.animals[i]}" }
     puts "Which animal do you want to adopt?"
     index = gets.to_i
 
     # add animal to client's animals array
-    clientObj.animals.push(shelter.animals[index])
+    clientObj.animals << shelter.animals[index]
 
     ## remove animal from shelter
-    shelter.animals.delete_at(index)
+    shelter.animals.reject! {|animal| animal == shelter.animals[index]}
     puts "You have adopted a new animal."
 
     puts "Press Enter to Continue..."
@@ -137,6 +117,10 @@ while choice != 6
   ### Quit
   when 6
     choice = 6
+  else
+    puts "Invalid Choice."
+    puts "Press Enter to Coninue..."
+    gets
   end
 end
 
