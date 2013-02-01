@@ -9,11 +9,6 @@ class Client
     @num_pets = animals.count
   end
 
-  def remove_animal_by_index(index)
-    binding.pry
-    @animals.delete_at(index)
-  end
-
   def to_s
     "Client: #{@name}, Gender: #{@gender}, Number of Pets: #{@num_pets}"
   end

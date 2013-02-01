@@ -31,6 +31,8 @@ class Shelter
   end
 
 
+
+
   def to_s
       "Shelter has #{clients.count} clients and #{animals.count} animals."
   end

@@ -34,7 +34,45 @@ c3 = Client.new('Brian',123,'m', 13, animals3)
 clients = [c1,c2,c3]
 shelter = Shelter.new("HappyTrails", clients, animals4)
 
+def add_client_sub_menu(clients)
+  "Registering in the Database..."
+  print "What is your name? "
+  name = gets.chomp
+  print "What is your age? "
+  age = gets.chomp
+  print "(M)ale or (F)emale: "
+  gender = gets.chomp
+  print "How many kids do you have? "
+  num_kids = gets.to_i
+  client = Client.new(name, age, gender, num_kids, [])
+  clients << client
+  puts "You are registered."
+  print "Would you like to register your pets? (Y) or (N) :"
+  ans = gets.chomp.upcase
+  if ans != 'Y'
+      return client
+  else
+    add_pets_submenu(client)
+  end
+end
 
+def add_pets_submenu(client)
+  begin
+    print "What is your pet's name? "
+    name = gets.chomp
+    print "What is your pet's age? "
+    age = gets.to_i
+    print "What is the breed? "
+    breed = gets.chomp
+    print "(M)ale or (F)emale? "
+    gender = gets.chomp
+    print "Do you want to register another pet? (Y) or (N)"
+    ans = gets.chomp.upcase
+  end while ans == 'Y'
+  client.animals << Animal.new(name,age,breed,gender)
+  puts "Animal registered..."
+  client
+end
 
 
 
@@ -50,7 +88,7 @@ while choice != 6
   puts "(5) Adopt an Animal"
   puts "(6) Quit"
   30.times.each {print '-'}
-  puts "\n What would you like to do? "
+  print "\n What would you like to do? "
   choice = gets.to_i
 
 
@@ -109,18 +147,19 @@ while choice != 6
       print "\nWould you like to register? (Y) or (N)"
       registering = gets.chomp
       next if registering != 'Y'.downcase
-
+      ## add person sub menu
+      clientObj = add_client_sub_menu(clients)
     end
 
     shelter.animals.count.times { |i| puts "#{i}. #{shelter.animals[i]}" }
-    puts "Which animal do you want to adopt?"
+    print "Which animal do you want to adopt?"
     index = gets.to_i
-
+    new_pet = shelter.animals[index]
     # add animal to client's animals array
-    clientObj.animals << shelter.animals[index]
+    clientObj.animals << new_pet
 
-    ## remove animal from shelter
-    shelter.animals.reject! {|animal| animal == shelter.animals[index]}
+    binding.pry
+    shelter.animals.reject! {|animal| animal == new_pet}
     puts "You have adopted a new animal."
 
     puts "Press Enter to Continue..."
@@ -135,5 +174,3 @@ while choice != 6
     gets
   end
 end
-
-binding.pry
